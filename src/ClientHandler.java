@@ -28,6 +28,7 @@ public class ClientHandler implements Runnable {
             String inputLine;
             while ((inputLine = in.readLine()) != null) {
                 String[] command = inputLine.split(" ", 2);
+                // print the command received from the client
                 System.out.println(threadName + ": Processing command: " + Arrays.toString(command));
 
                 // Check if the client wants to exit
@@ -48,15 +49,18 @@ public class ClientHandler implements Runnable {
                 switch (action) {
                     case "add":
                         addWord(word);
+                        out.println("END");
                         break;
                     case "delete":
                         deleteWord(word);
+                        out.println("END");
                         break;
                     case "search":
                         searchWord(word);
                         break;
                     case "update":
                         updateWord(word);
+                        out.println("END");
                         break;
                     default:
                         out.println("Invalid command");
@@ -83,21 +87,39 @@ public class ClientHandler implements Runnable {
         }
     }
 
+    // Query the meaning(s) of a given word
+    private void searchWord(String word) {
+        if (dictionary.containsKey(word)) {
+            List<String> meanings = dictionary.get(word);
+            out.println(word + " has " + meanings.size() + " meanings");
+            int i = 1;
+            for (String meaning : meanings) {
+                out.println(i + ". " + meaning);
+                i++;
+            }
+            out.println("END");
+        } else {
+            out.println("Word not found");
+            out.println("END");
+        }
+    }
+
+    // Add a new word
     private void addWord(String input) {
-        String[] parts = input.split(" ", 2);
-        if (parts.length < 2) {
+        String[] word_meaning = input.split(" ", 2);
+        if (word_meaning.length < 2) {
             out.println("Invalid command (you need to provide a word and a meaning)");
             return;
         }
 
-        String word = parts[0];
-        String meaning = parts[1];
+        String word = word_meaning[0];
+        String meaning = word_meaning[1];
 
         if (dictionary.containsKey(word)) {
-            // List<String> meanings = dictionary.get(word);
-            // meanings.add(meaning);
-            // dictionary.put(word, meanings);
-            out.println("The word already exists");
+            List<String> meanings = dictionary.get(word);
+            meanings.add(meaning);
+            dictionary.put(word, meanings);
+            out.println("The word already exists, success in adding a new meaning");
         } else {
             List<String> meanings = new ArrayList<>();
             meanings.add(meaning);
@@ -106,6 +128,7 @@ public class ClientHandler implements Runnable {
         }
     }
 
+    // Remove an existing word
     private void deleteWord(String word) {
         if (dictionary.containsKey(word)) {
             dictionary.remove(word);
@@ -115,17 +138,7 @@ public class ClientHandler implements Runnable {
         }
     }
 
-    private void searchWord(String word) {
-        if (dictionary.containsKey(word)) {
-            List<String> meanings = dictionary.get(word);
-            for (String meaning : meanings) {
-                out.println(meaning);
-            }
-        } else {
-            out.println("Word not found");
-        }
-    }
-
+    // Update meaning of an existing word
     private void updateWord(String input) {
         String[] parts = input.split(" ", 2);
         if (parts.length < 2) {

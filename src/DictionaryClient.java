@@ -26,8 +26,14 @@ public class DictionaryClient {
                 }
 
                 out.println(userInput);
-                String response = in.readLine();
-                System.out.println("Server response: " + response);
+                String response;
+                while ((response = in.readLine()) != null) {
+                    if (response.equals("END")) {
+                        break;
+                    }
+                    System.out.println("Server response: " + response);
+                }
+                
                 System.out.println("Enter another command or type 'exit' to quit:");
             }
         } catch (UnknownHostException e) {

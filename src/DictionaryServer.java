@@ -25,6 +25,7 @@ public class DictionaryServer {
         server.start(port);
     }
 
+    // This method loads the dictionary from a JSON file
     private void loadDictionaryFromFile(String fileName) {
         try {
             String fileContent = new String(Files.readAllBytes(Paths.get(fileName)), StandardCharsets.UTF_8);

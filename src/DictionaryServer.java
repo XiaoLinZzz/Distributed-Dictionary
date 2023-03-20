@@ -190,7 +190,7 @@ public class DictionaryServer {
         private void searchWord(String word) {
             if (dictionary.containsKey(word)) {
                 List<String> meanings = dictionary.get(word);
-                out.println(word + " has " + meanings.size() + " meanings");
+                out.println(Client_Report(sucess_status, "Successfully searched word " + word + " with " + meanings.size() + " meanings"));
                 int num_meanings = 1;
                 for (String meaning : meanings) {
                     out.println(num_meanings + ". " + meaning);

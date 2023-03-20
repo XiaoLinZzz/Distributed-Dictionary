@@ -119,11 +119,13 @@ public class DictionaryClient {
     private static void sendCommand(JTextField commandArea, JTextArea textArea) {
         String command = commandArea.getText().trim();
         if (!command.isEmpty()) {
+            textArea.append("User input: " + command + "\n");
             out.println(command);
             try {
                 String response;
                 while ((response = in.readLine()) != null) {
                     if (response.equals("END")) {
+                        textArea.append("\n");
                         break;
                     }
                     textArea.append("Server response --> " + response + "\n");

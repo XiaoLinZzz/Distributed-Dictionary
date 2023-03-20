@@ -13,6 +13,8 @@ public class DictionaryClient {
     private static Socket socket;
     private static BufferedReader in;
     private static PrintWriter out;
+    private static JTextArea textArea;
+    private static JTextField commandArea;
 
     public static void main(String[] args) {
         if (args.length < 2) {
@@ -28,19 +30,13 @@ public class DictionaryClient {
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             out = new PrintWriter(socket.getOutputStream(), true);
         } catch (IOException e) {
-            showErrorDialog("Error connecting to server: " + e.getMessage());
-            System.exit(1);
-        } catch (UnknownError e) {
-            showErrorDialog("Error connecting to server: Unknown host: " + e.getMessage());
+            System.err.println("Error connecting to server: " + e.getMessage());
             System.exit(1);
         }
 
         SwingUtilities.invokeLater(() -> Client_GUI());
     }
 
-    private static void showErrorDialog(String errorMessage) {
-        JOptionPane.showMessageDialog(null, errorMessage, "Error", JOptionPane.ERROR_MESSAGE);
-    }
 
     private static void Client_GUI() {
         // Frame
@@ -59,7 +55,7 @@ public class DictionaryClient {
         titlePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         mainPanel.add(titlePanel, BorderLayout.NORTH);
 
-        JLabel titleLabel = new JLabel("Dictionary Client");
+        JLabel titleLabel = new JLabel("My Dictionary");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
         titlePanel.add(titleLabel);
 
@@ -89,6 +85,14 @@ public class DictionaryClient {
 
         JTextField commandArea = new JTextField();
         commandArea.setPreferredSize(new Dimension(400, 30));
+        commandArea.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    sendCommand(commandArea, textArea);
+                }
+            }
+        });
         inputPanel.add(commandArea);
 
         JButton sendCommandButton = new JButton("Send Command");
@@ -100,22 +104,7 @@ public class DictionaryClient {
         sendCommandButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String command = commandArea.getText().trim();
-                if (!command.isEmpty()) {
-                    out.println(command);
-                    try {
-                        String response;
-                        while ((response = in.readLine()) != null) {
-                            if (response.equals("END")) {
-                                break;
-                            }
-                            textArea.append("Server response: " + response + "\n");
-                        }
-                    } catch (IOException ex) {
-                        showErrorDialog("Error reading response from server: " + ex.getMessage());
-                    }
-                }
-                commandArea.setText("");
+                sendCommand(commandArea, textArea);
             }
         });
     
@@ -128,5 +117,23 @@ public class DictionaryClient {
     
         frame.setVisible(true);
     }
+
+    private static void sendCommand(JTextField commandArea, JTextArea textArea) {
+        String command = commandArea.getText().trim();
+        if (!command.isEmpty()) {
+            out.println(command);
+            try {
+                String response;
+                while ((response = in.readLine()) != null) {
+                    if (response.equals("END")) {
+                        break;
+                    }
+                    textArea.append("Server response --> " + response + "\n");
+                }
+            } catch (IOException ex) {
+                System.err.println("Error reading response from server: " + ex.getMessage());
+            }
+        }
+        commandArea.setText("");
+    }
 }
-    

@@ -6,9 +6,11 @@ import org.json.JSONObject;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class DictionaryServer {
     private static final AtomicInteger clientCount = new AtomicInteger(0);
+    private static ConcurrentHashMap<String, List<String>> dictionary = new ConcurrentHashMap<>();
 
     public static void main(String[] args) {
         if (args.length < 2) {
@@ -19,7 +21,7 @@ public class DictionaryServer {
         int portNumber = Integer.parseInt(args[0]);
         String dictionaryFilePath = args[1];
 
-        HashMap<String, List<String>> dictionary = loadDictionary(dictionaryFilePath);
+        dictionary = loadDictionary(dictionaryFilePath);
 
         try (ServerSocket serverSocket = new ServerSocket(portNumber)) {
             System.out.println("Dictionary Server is running...");
@@ -37,8 +39,8 @@ public class DictionaryServer {
         }
     }
 
-    private static HashMap<String, List<String>> loadDictionary(String filePath) {
-        HashMap<String, List<String>> dictionary = new HashMap<>();
+    private static ConcurrentHashMap<String, List<String>> loadDictionary(String filePath) {
+        ConcurrentHashMap<String, List<String>> dictionary = new ConcurrentHashMap<>();
 
         try {
             String jsonString = new String(Files.readAllBytes(Paths.get(filePath)));
@@ -64,13 +66,13 @@ public class DictionaryServer {
     private static class ClientHandler implements Runnable {
         private Socket clientSocket;
         private int clientId;
-        private HashMap<String, List<String>> dictionary;
+        private ConcurrentHashMap<String, List<String>> dictionary;
         private BufferedReader in;
         private PrintWriter out;
         private String sucess_status = "[SUCCESS]";
         private String fail_status = "[FAIL]";
 
-        public ClientHandler(Socket clientSocket, HashMap<String, List<String>> dictionary, String threadName) {
+        public ClientHandler(Socket clientSocket, ConcurrentHashMap<String, List<String>> dictionary, String threadName) {
             this.clientSocket = clientSocket;
             this.dictionary = dictionary;
             this.clientId = Integer.parseInt(threadName.split("-")[1]);

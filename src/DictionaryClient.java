@@ -13,8 +13,6 @@ public class DictionaryClient {
     private static Socket socket;
     private static BufferedReader in;
     private static PrintWriter out;
-    private static JTextArea textArea;
-    private static JTextField commandArea;
 
     public static void main(String[] args) {
         if (args.length < 2) {

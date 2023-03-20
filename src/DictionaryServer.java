@@ -78,8 +78,12 @@ public class DictionaryServer {
             this.clientId = Integer.parseInt(threadName.split("-")[1]);
         }
 
-        public String Report (int clientId, String status, String message) {
+        public String Server_Report (int clientId, String status, String message) {
             return "Client " + clientId + ":" + status + " " + message;
+        }
+
+        public String Client_Report (String status, String message) {
+            return status + "  " + message;
         }
 
         @Override
@@ -100,7 +104,7 @@ public class DictionaryServer {
                     }
                     
                     if (command.length < 2) {
-                        System.out.println(Report(clientId, fail_status, "Invalid command: Arguments missing"));
+                        System.out.println(Server_Report(clientId, fail_status, "Invalid command: Arguments missing"));
                         out.println("Invalid command: Arguments missing");
                         out.println("END");
                         continue;
@@ -126,7 +130,7 @@ public class DictionaryServer {
                             out.println("END");
                             break;
                         default:
-                            System.out.println(Report(clientId, fail_status, "Invalid command"));
+                            System.out.println(Server_Report(clientId, fail_status, "Invalid command"));
                             out.println("Invalid command");
                             out.println("END");
                             break;
@@ -148,7 +152,7 @@ public class DictionaryServer {
             String[] word_meaning = word.split(" ", 2);
             if (word_meaning.length < 2) {
                 out.println("Add command with wrong syntax");
-                System.out.println(Report(clientId, fail_status, "Add command with wrong syntax"));
+                System.out.println(Server_Report(clientId, fail_status, "Add command with wrong syntax"));
                 return;
             }
 
@@ -159,14 +163,14 @@ public class DictionaryServer {
                 List<String> meanings = dictionary.get(wordToAdd);
                 meanings.add(meaningToAdd);
                 dictionary.put(wordToAdd, meanings);
-                out.println("Successfully added meaning to the word " + wordToAdd);
-                System.out.println(Report(clientId, sucess_status, "Add meaning to the word " + wordToAdd));
+                out.println(Client_Report(sucess_status, "Successfully added meaning to the word " + wordToAdd));
+                System.out.println(Server_Report(clientId, sucess_status, "Add meaning to the word " + wordToAdd));
             } else {
                 List<String> meanings = new ArrayList<>();
                 meanings.add(meaningToAdd);
                 dictionary.put(wordToAdd, meanings);
-                out.println("Successfully added word " + wordToAdd);
-                System.out.println(Report(clientId, sucess_status, "Add word " + wordToAdd));
+                out.println(Client_Report(sucess_status, "Successfully added word " + wordToAdd));
+                System.out.println(Server_Report(clientId, sucess_status, "Add word " + wordToAdd));
             }
         }
 
@@ -174,11 +178,11 @@ public class DictionaryServer {
         private void deleteWord(String word) {
             if (dictionary.containsKey(word)) {
                 dictionary.remove(word);
-                out.println("Successfully deleted word " + word);
-                System.out.println(Report(clientId, sucess_status, "Delete word " + word));
+                out.println(Client_Report(sucess_status, "Successfully deleted word " + word));
+                System.out.println(Server_Report(clientId, sucess_status, "Delete word " + word));
             } else {
-                out.println("Word " + word + " does not exist");
-                System.out.println(Report(clientId, fail_status, "Delete word " + word + " does not exist"));
+                out.println(Client_Report(fail_status, "Delete word " + word + " does not exist"));
+                System.out.println(Server_Report(clientId, fail_status, "Delete word " + word + " does not exist"));
             }
         }
 
@@ -193,10 +197,10 @@ public class DictionaryServer {
                     num_meanings++;
                 }
                 out.println("END");
-                System.out.println(Report(clientId, sucess_status, "Search word " + word));
+                System.out.println(Server_Report(clientId, sucess_status, "Search word " + word));
             } else {
-                out.println("Word " + word + " does not exist");
-                System.out.println(Report(clientId, fail_status, "Search word " + word + " does not exist"));
+                out.println(Client_Report(fail_status, "Search word " + word + " does not exist"));
+                System.out.println(Server_Report(clientId, fail_status, "Search word " + word + " does not exist"));
                 out.println("END");
             }
         }
@@ -205,8 +209,8 @@ public class DictionaryServer {
         private void updateWord(String word) {
             String[] word_meaning = word.split(" ", 2);
             if (word_meaning.length < 2) {
-                System.out.println(Report(clientId, fail_status, "Update command with wrong syntax"));
-                out.println("Update command with wrong syntax");
+                System.out.println(Server_Report(clientId, fail_status, "Update command with wrong syntax"));
+                out.println(Client_Report(fail_status, "Update command with wrong syntax"));
                 return;
             }
 
@@ -217,11 +221,11 @@ public class DictionaryServer {
                 List<String> meanings = new ArrayList<>();
                 meanings.add(meaningToUpdate);
                 dictionary.put(wordToUpdate, meanings);
-                out.println("Successfully updated meaning to the word " + wordToUpdate);
-                System.out.println(Report(clientId, sucess_status, "Update meaning to the word " + wordToUpdate));
+                out.println(Client_Report(sucess_status, "Successfully updated meaning to the word " + wordToUpdate));
+                System.out.println(Server_Report(clientId, sucess_status, "Update meaning to the word " + wordToUpdate));
             } else {
-                out.println("Word " + wordToUpdate + " does not exist");
-                System.out.println(Report(clientId, fail_status, "Update word " + wordToUpdate + " does not exist"));
+                out.println(Client_Report(fail_status, "Update word " + wordToUpdate + " does not exist"));
+                System.out.println(Server_Report(clientId, fail_status, "Update word " + wordToUpdate + " does not exist"));
             }
         }
     }

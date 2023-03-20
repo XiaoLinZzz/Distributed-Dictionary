@@ -1,7 +1,10 @@
 {
-  "hello": "An expression or gesture of greeting.",
-  "world": "A planet, especially when considered as an inhabited place.",
-  "apple": "A round fruit with a thin red or green skin and crisp flesh.",
-  "orange": "A round citrus fruit with a tough, bright reddish-yellow rind.",
-  "banana": "A long curved fruit that grows in clusters and has a soft, sweet flesh."
+  "orange": [
+    "A round citrus fruit with a tough, bright reddish-yellow rind.",
+    "A color between yellow and red in the spectrum."
+  ],
+  "apple": [
+    "The usually round, red or yellow, edible fruit of a small tree, Malus sylvestris, of the rose family.",
+    "The tree, cultivated in most temperate regions."
+  ]
 }

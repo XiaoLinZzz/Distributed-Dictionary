@@ -1,5 +1,7 @@
 # Dictionary Server and Client
 
+This is an assignment for the course **COMP90015 Distributed Systems**. The details can find in the [Assignment1.pdf](Assignment1.pdf)
+
 This project consists of a simple dictionary server and client system written in Java. The server maintains a dictionary of words and their meanings, and the client can connect to the server to perform operations like adding, deleting, searching, and updating words and their meanings.
 
 ## Prerequisites
@@ -8,10 +10,10 @@ This project consists of a simple dictionary server and client system written in
 - A JSON file containing the initial words and meanings for the dictionary
 
 ## Features
-1. Add a new word along with its meaning.
-2. Delete a word from the dictionary.
-3. Search for a word and display its meanings.
-4. Update the meaning of an existing word.
+-  **Add** a new word along with its meaning.
+-  **Delete** a word from the dictionary.
+-  **Search** for a word and display its meanings.
+-  **Update** the meaning of an existing word.
 
 ## How to Compile and Run
 

@@ -7,6 +7,12 @@ This project consists of a simple dictionary server and client system written in
 - Java Development Kit (JDK) 8 or later
 - A JSON file containing the initial words and meanings for the dictionary
 
+## Features
+1. Add a new word along with its meaning.
+2. Delete a word from the dictionary.
+3. Search for a word and display its meanings.
+4. Update the meaning of an existing word.
+
 ## How to Compile and Run
 
 1. Compile the server and client files:

@@ -6,6 +6,7 @@ This is an assignment for the course **COMP90015: Distributed Systems**. The det
 
 This project consists of a simple dictionary server and client system written in Java. The server maintains a dictionary of words and their meanings, and the client can connect to the server to perform operations like adding, deleting, searching, and updating words and their meanings.
 
+## GUI diaplay
 ![example](example.png)
 
 ## Prerequisites

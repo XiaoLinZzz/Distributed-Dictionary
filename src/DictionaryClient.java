@@ -40,7 +40,7 @@ public class DictionaryClient {
         // Frame
         JFrame frame = new JFrame("My Dictionary");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1000, 600);
+        frame.setSize(1300, 600);
 
         // Main panel
         JPanel mainPanel = new JPanel();

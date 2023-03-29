@@ -20,8 +20,12 @@ public class DictionaryClient {
             System.exit(1);
         }
 
-        String address = args[0];
-        int portNumber = Integer.parseInt(args[1]);
+        // test
+        String address = "localhost";
+        int portNumber = 8080;
+
+        // String address = args[0];
+        // int portNumber = Integer.parseInt(args[1]);
 
         try {
             socket = new Socket(address, portNumber);
@@ -40,7 +44,7 @@ public class DictionaryClient {
         // Frame
         JFrame frame = new JFrame("My Dictionary");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1300, 600);
+        frame.setSize(1100, 600);
 
         // Main panel
         JPanel mainPanel = new JPanel();

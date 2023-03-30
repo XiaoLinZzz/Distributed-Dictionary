@@ -229,14 +229,14 @@ public class DictionaryServer {
                 List<String> meanings = dictionary.get(wordToAdd);
                 meanings.add(meaningToAdd);
                 dictionary.put(wordToAdd, meanings);
-                out.println(Client_Report(sucess_status, "Successfully added meaning to the word " + wordToAdd));
-                updateServerlog(Server_Report(clientId, sucess_status, "Add meaning to the word " + wordToAdd));
+                out.println(Client_Report(sucess_status, "Successfully added meaning to the word {" + wordToAdd + "}"));
+                updateServerlog(Server_Report(clientId, sucess_status, "Add meaning to the word {" + wordToAdd + "}"));
             } else {
                 List<String> meanings = new ArrayList<>();
                 meanings.add(meaningToAdd);
                 dictionary.put(wordToAdd, meanings);
-                out.println(Client_Report(sucess_status, "Successfully added word " + wordToAdd));
-                updateServerlog(Server_Report(clientId, sucess_status, "Add word " + wordToAdd));
+                out.println(Client_Report(sucess_status, "Successfully added word {" + wordToAdd + "}"));
+                updateServerlog(Server_Report(clientId, sucess_status, "Add word {" + wordToAdd + "}"));
             }
         }
 
@@ -244,12 +244,12 @@ public class DictionaryServer {
         private void deleteWord(String word) {
             if (dictionary.containsKey(word)) {
                 dictionary.remove(word);
-                out.println(Client_Report(sucess_status, "Successfully deleted word " + word));
-                updateServerlog(Server_Report(clientId, sucess_status, "Delete word " + word));
+                out.println(Client_Report(sucess_status, "Successfully deleted word {" + word + "}"));
+                updateServerlog(Server_Report(clientId, sucess_status, "Delete word {" + word + "}"));
                
             } else {
-                out.println(Client_Report(fail_status, "Delete word " + word + " does not exist"));
-                updateServerlog(Server_Report(clientId, fail_status, "Delete word " + word + " does not exist"));
+                out.println(Client_Report(fail_status, "Delete word {" + word + "} does not exist"));
+                updateServerlog(Server_Report(clientId, fail_status, "Delete word {" + word + "} does not exist"));
                 
             }
         }
@@ -258,18 +258,18 @@ public class DictionaryServer {
         private void searchWord(String word) {
             if (dictionary.containsKey(word)) {
                 List<String> meanings = dictionary.get(word);
-                out.println(Client_Report(sucess_status, "Successfully searched word " + word + " with " + meanings.size() + " meanings"));
+                out.println(Client_Report(sucess_status, "Successfully searched word {" + word + "} with " + meanings.size() + " meanings"));
                 int num_meanings = 1;
                 for (String meaning : meanings) {
                     out.println(num_meanings + ". " + meaning);
                     num_meanings++;
                 }
                 out.println("END");
-                updateServerlog(Server_Report(clientId, sucess_status, "Search word " + word));
+                updateServerlog(Server_Report(clientId, sucess_status, "Search word {" + word + "}"));
                 
             } else {
-                out.println(Client_Report(fail_status, "Search word " + word + " does not exist"));
-                updateServerlog(Server_Report(clientId, fail_status, "Search word " + word + " does not exist"));
+                out.println(Client_Report(fail_status, "Search word {" + word + "} does not exist"));
+                updateServerlog(Server_Report(clientId, fail_status, "Search word {" + word + "} does not exist"));
                 
                 out.println("END");
             }
@@ -292,12 +292,12 @@ public class DictionaryServer {
                 List<String> meanings = new ArrayList<>();
                 meanings.add(meaningToUpdate);
                 dictionary.put(wordToUpdate, meanings);
-                out.println(Client_Report(sucess_status, "Successfully updated meaning to the word " + wordToUpdate));
-                updateServerlog(Server_Report(clientId, sucess_status, "Update meaning to the word " + wordToUpdate));
+                out.println(Client_Report(sucess_status, "Successfully updated meaning to the word {" + wordToUpdate + "}"));
+                updateServerlog(Server_Report(clientId, sucess_status, "Update meaning to the word {" + wordToUpdate + "}"));
         
             } else {
-                out.println(Client_Report(fail_status, "Update word " + wordToUpdate + " does not exist"));
-                updateServerlog(Server_Report(clientId, fail_status, "Update word " + wordToUpdate + " does not exist"));
+                out.println(Client_Report(fail_status, "Update word {" + wordToUpdate + "} does not exist"));
+                updateServerlog(Server_Report(clientId, fail_status, "Update word {" + wordToUpdate + "} does not exist"));
             }
         }
     }

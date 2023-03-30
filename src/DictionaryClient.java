@@ -4,6 +4,9 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -21,11 +24,11 @@ public class DictionaryClient {
         }
 
         // test
-        String address = "localhost";
-        int portNumber = 8080;
+        // String address = "localhost";
+        // int portNumber = 8080;
 
-        // String address = args[0];
-        // int portNumber = Integer.parseInt(args[1]);
+        String address = args[0];
+        int portNumber = Integer.parseInt(args[1]);
 
         try {
             socket = new Socket(address, portNumber);
@@ -82,12 +85,14 @@ public class DictionaryClient {
         inputPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
         mainPanel.add(inputPanel, BorderLayout.SOUTH);
 
-        JLabel inputLabel = new JLabel("Enter Command (add, delete, search, update):");
+        JLabel inputLabel = new JLabel("Enter Command (add, delete, search, update or exit):");
         inputPanel.add(inputLabel);
 
         JTextField commandArea = new JTextField();
-        commandArea.setPreferredSize(new Dimension(400, 30));
+        commandArea.setPreferredSize(new Dimension(300, 30));
         commandArea.addKeyListener(new KeyAdapter() {
+            
+            // allow user to press enter to send command
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -109,7 +114,8 @@ public class DictionaryClient {
                 sendCommand(commandArea, textArea);
             }
         });
-    
+        
+        // clear response button
         clearButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -123,10 +129,17 @@ public class DictionaryClient {
     private static void sendCommand(JTextField commandArea, JTextArea textArea) {
         String command = commandArea.getText().trim();
         if (!command.isEmpty()) {
-            textArea.append("User input: " + command + "\n");
+            LocalDateTime now = LocalDateTime.now();
+            String timestamp = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+            textArea.append("[" + timestamp + "] " + "User input: " + command + "\n");
             out.println(command);
             try {
                 String response;
+                if (command.equals("exit")) {
+                    socket.close();
+                    System.exit(0);
+                }
+
                 while ((response = in.readLine()) != null) {
                     if (response.equals("END")) {
                         textArea.append("\n");

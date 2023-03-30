@@ -7,6 +7,9 @@ import java.nio.file.Paths;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.ConcurrentHashMap;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import java.awt.*;
 import javax.swing.*;
 
@@ -27,11 +30,11 @@ public class DictionaryServer {
         }
 
         // test
-        int portNumber = 8080;
-        String dictionaryFilePath = "dict.Json";
+        // int portNumber = 8080;
+        // String dictionaryFilePath = "dict.Json";
 
-        // int portNumber = Integer.parseInt(args[0]);
-        // String dictionaryFilePath = args[1];
+        int portNumber = Integer.parseInt(args[0]);
+        String dictionaryFilePath = args[1];
 
         dictionary = loadDictionary(dictionaryFilePath);
         Server_GUI();
@@ -41,7 +44,7 @@ public class DictionaryServer {
 
             while (true) {
                 Socket clientSocket = serverSocket.accept();
-                String threadName = "ClientHandler-" + clientCount.incrementAndGet();
+                String threadName = "Client -" + clientCount.incrementAndGet();
                 updateServerlog(threadName + ": Connection established");
                 
                 updateCountLabel(clientCount.get());
@@ -112,9 +115,11 @@ public class DictionaryServer {
     }
 
     private static void updateServerlog(String text) {
+        LocalDateTime now = LocalDateTime.now();
+        String timestamp = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         SwingUtilities.invokeLater(() -> 
         {
-            serverlog.append(text + "\n");
+            serverlog.append("[" + timestamp + "] " + text + "\n");
             serverlog.setCaretPosition(serverlog.getDocument().getLength());
         });
     }
@@ -198,8 +203,11 @@ public class DictionaryServer {
                 try {
                     updateServerlog(Server_Report(clientId, sucess_status, "Disconnected"));
                     clientSocket.close();
+
+                    // Update the number of clients connected
                     int updatedClientCount = clientCount.decrementAndGet();
                     updateCountLabel(updatedClientCount);
+
                 } catch (IOException e) {
                     updateServerlog(Server_Report(clientId, fail_status, "Error closing client socket: " + e.getMessage()));
                 }

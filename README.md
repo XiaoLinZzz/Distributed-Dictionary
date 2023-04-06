@@ -43,10 +43,21 @@ java DictionaryServer <port> <path_to_dictionary_file>
 java DictionaryClient <server_address> <port>
 ```
 
-**Or**
+### Or
 
-4. We also provide **Jar** file:
+1. We also provide **Jar** file, you can run the server and client with the following command:
 
+2. Run the server with the following command, replacing `<port>` with the desired port number and `<path_to_dictionary_file>` with the path to your JSON file containing the initial dictionary:
+
+```
+java -jar DictionaryServer.jar <port> <path_to_dictionary_file>
+```
+
+
+3. Run the client with the following command, replacing `<server_address>` with the server's address and `<port>` with the port number used by the server:
+```
+java -jar DictionaryClient.jar <server_address> <port>
+```
 
 
 

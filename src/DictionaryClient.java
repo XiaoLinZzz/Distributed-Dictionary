@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-
+import java.net.SocketException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -147,6 +147,8 @@ public class DictionaryClient {
                     }
                     textArea.append("Server response --> " + response + "\n");
                 }
+            } catch (SocketException ex) {
+                System.err.println("Server closed connection: " + ex.getMessage());
             } catch (IOException ex) {
                 System.err.println("Error reading response from server: " + ex.getMessage());
             }

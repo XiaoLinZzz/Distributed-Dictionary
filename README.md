@@ -12,7 +12,7 @@ This project consists of a simple dictionary server and client system written in
 ## Language & Tools
 
 <div style="display: flex; flex-direction: row; gap: 10px;">
-    <img src="https://img.shields.io/static/v1?label=Java&message=SE11&color=F7DF1E&style=for-the-badge&logo=java" alt="Java Badge">
+    <img src="https://img.shields.io/static/v1?label=Java&message=SE11&color=F7DF1E&style=for-the-badge&logo=Oracle" alt="Java Badge">
     <img src="https://img.shields.io/static/v1?label=VSCode&message=1.60.0&color=007ACC&style=for-the-badge&logo=visual-studio-code" alt="VSCode Badge">
     <img src="https://img.shields.io/static/v1?label=Git&message=2.40.0&color=F05032&style=for-the-badge&logo=git" alt="VSCode Badge">
     <img src="https://img.shields.io/static/v1?label=Apache Maven&message=3.9.1&color=C71A36&style=for-the-badge&logo=Apache-Maven" alt="VSCode Badge">

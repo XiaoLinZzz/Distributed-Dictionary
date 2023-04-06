@@ -25,6 +25,27 @@ This project consists of a simple dictionary server and client system written in
 -  **Search** for a word and display its meanings.
 -  **Update** the meaning of an existing word.
 
+## Dictionary File Format
+
+The dictionary file should be a JSON file containing a list of words and their meanings. Each word should have a unique name, and each meaning should be a string. Here is an example of a dictionary file:
+
+```json
+[
+    {
+    "orange": [
+        "A round citrus fruit with a tough, bright reddish-yellow rind.",
+        "A color between yellow and red in the spectrum."
+    ],
+    "apple": [
+        "The usually round, red or yellow, edible fruit of a small tree.",
+        "The tree, cultivated in most temperate regions."
+    ]
+    }
+]
+```
+
+We provide a sample dictionary file in the [dictionary.json](dictionary.json) file.
+
 ## How to Compile and Run
 
 1. Compile the server and client files:

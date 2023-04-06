@@ -9,9 +9,10 @@ This project consists of a simple dictionary server and client system written in
 ## GUI diaplay (Server & Client)
 ![GUI](GUI.png)
 
-## Language
+## Language & Tools
 
 ![Java](https://img.shields.io/static/v1?label=Java&message=SE11&color=#F7DF1E&style=for-the-badge&logo=java)
+![VSCode](https://img.shields.io/static/v1?label=VSCode&message=1.60.0&color=#007ACC&style=for-the-badge&logo=visual-studio-code)
 
 
 ## Prerequisites

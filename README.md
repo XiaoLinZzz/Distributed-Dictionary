@@ -82,7 +82,7 @@ java -jar DictionaryServer.jar <port> <path_to_dictionary_file>
 
 3. Run the client with the following command, replacing `<server_address>` with the server's address and `<port>` with the port number used by the server:
 ```
-java -jar DictionaryClient.jar <server_address> <port>
+java -jar DictionaryClient.jar <server-address> <server-port>
 ```
 
 
@@ -109,3 +109,4 @@ You can check the report in the [Report.pdf](Report.pdf)
 
 
 ## Example
+![example](example.png)

@@ -18,6 +18,8 @@ This project consists of a simple dictionary server and client system written in
     <img src="https://img.shields.io/static/v1?label=Apache Maven&message=3.9.1&color=C71A36&style=for-the-badge&logo=Apache-Maven" alt="VSCode Badge">
     <img src="https://img.shields.io/static/v1?label=Gradle&message=8.0.2&color=02303A&style=for-the-badge&logo=Gradle" alt="VSCode Badge">
 </div>
+
+
 ## Prerequisites
 
 - Java Development Kit (JDK) 8 or later

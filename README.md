@@ -72,4 +72,9 @@ The client can send commands to the server to perform various operations on the 
 
 To exit the client, type `exit`.
 
+
+## Report
+You can check the report in the [Report.pdf](Report.pdf)
+
+
 ## Example

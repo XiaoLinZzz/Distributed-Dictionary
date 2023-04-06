@@ -43,6 +43,12 @@ java DictionaryServer <port> <path_to_dictionary_file>
 java DictionaryClient <server_address> <port>
 ```
 
+**Or**
+
+4. We also provide **Jar** file:
+
+
+
 
 ## Usage
 

@@ -147,10 +147,20 @@ public class DictionaryClient {
                     }
                     textArea.append("Server response --> " + response + "\n");
                 }
+
+                if (response == null) {
+                    textArea.append("Error: Server may have been closed unexpectedly.\n");
+                    socket.close();
+                    // System.exit(1); // Close the client
+                }
+
             } catch (SocketException ex) {
-                System.err.println("Server closed connection: " + ex.getMessage());
+                textArea.append("Error: Server may have been closed unexpectedly.\n");
+                ex.printStackTrace();
+                // System.exit(0);
             } catch (IOException ex) {
                 System.err.println("Error reading response from server: " + ex.getMessage());
+                System.exit(0);
             }
         }
         commandArea.setText("");

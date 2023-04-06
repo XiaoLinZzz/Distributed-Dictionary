@@ -1,6 +1,6 @@
 # Dictionary Server and Client
 
-This is an assignment for the course **COMP90015: Distributed Systems**. The details can find in the [Assignment1.pdf](Assignment1.pdf)
+This repo is an implementation of the assignment for the course **COMP90015: Distributed Systems**. The details can find in the [Assignment1.pdf](Assignment1.pdf)
 
 ---
 

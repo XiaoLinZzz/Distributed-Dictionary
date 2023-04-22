@@ -55,6 +55,9 @@ We provide a sample dictionary file in the [dictionary.json](dictionary.json) fi
 ## How to Compile and Run
 
 1. Compile the server and client files:
+```
+cd src
+```
 
 ```
 javac DictionaryServer.java

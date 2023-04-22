@@ -116,3 +116,6 @@ You can check the report in the [Report.pdf](Report.pdf)
 
 ## Example
 ![example](example.png)
+
+## License
+
